@@ -1,0 +1,75 @@
+//1、循环链表存储结构     
+class LinkData
+{
+    public int value { get; set; }//小孩子的ID
+    public LinkData next { get; set; }//下一个小孩子的位置    
+    private LinkData(int m_value)
+    {
+        value=m_value;
+    }        
+    //孩子们围坐一圈
+    public static LinkData CreateLink(int []arr)
+    {
+        LinkData head = new LinkData(0);
+        LinkData p = head;
+        for(int i=0;i<arr.Length-1;i++)
+        {
+            p.value = arr[i];
+            p.next = new LinkData(0);
+            p = p.next;
+        }
+        p.value = arr[arr.Length - 1];
+        p.next = head;//循环链表，尾巴指向头
+        return head;
+    }
+
+    //丢手绢算法
+    public static void Yuesefu(LinkData head, int i, int M)
+    {
+        //DateTime dt = DateTime.Now;
+        //Console.WriteLine("link go:");
+        LinkData f = head;//头
+        LinkData r=f;//尾
+        for (; i > 0; i--) //进入移动到第一次丢手绢的位置
+        {
+            r = f;
+            f = f.next;
+        }
+        while (r.next != r)//是否剩下最后一个小孩子
+        {
+            for(int j=0;j<M;j++)
+            {
+                r=f;
+                f=f.next;
+            }
+            Console.Write(f.value.ToString() + " ");//小孩子报上名来
+            f = f.next;//踢掉一个小孩子
+            r.next = f;
+        }
+        Console.WriteLine(r.value.ToString());//小孩子报上名来
+        //Console.WriteLine(string.Format("耗时{0}毫秒",(DateTime.Now-dt).TotalMilliseconds));
+    }
+}
+
+//2、List<Int>存储结构
+class ListData
+{
+    //丢手绢算法，直接通过在List<Int>集合中定位元素，再移除元素,循环往复，直到集合为空
+    public static void Yuesefu(List<int> src, int i, int M)
+    {
+        
+        int len = src.Count;
+        i = (i + M) % src.Count;
+        //Console.WriteLine("list go:");
+        //DateTime dt = DateTime.Now;
+        while (src.Count > 1)
+        {
+            Console.Write(src[i].ToString() + " ");//小孩子报上名来
+            src.RemoveAt(i);//踢掉一个小孩子
+            i = (i + M) % src.Count;
+        }
+        Console.WriteLine(src[i].ToString());//小孩子报上名来
+        //Console.WriteLine(string.Format("耗时{0}毫秒", (DateTime.Now - dt).TotalMilliseconds));
+    }
+}
+

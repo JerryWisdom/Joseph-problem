@@ -1,0 +1,43 @@
+#方法一
+defy(N,K,M):
+	l=range(1,N+1)
+	B=K
+	foriinrange(0,N-1):
+		B=(K+B)%len(l)
+		printstr(l[B])+'died'
+		dell[B]
+		print'last:'+str(l[0])
+
+#窃以为上面的有问题，个人方法如下(无法输入空格，所以用_代替空格)：
+	def_josephus(N,K,M):
+		queue=range(1,N+1)
+		count=K-1
+		for_i_in_range(0,N-1):
+			count=(count+M-1)%len(queue)
+			print_'OUT:'+str(queue[count])
+			del_queue[count]
+			print_'WIN:'+str(queue[0])
+
+#方法二
+	defjosephus(n,k):
+		link=range(1,n+1)
+		ind=0
+		forloop_iinrange(n-1):
+			ind=(ind+k)%len(link)
+		ind-=1
+		print'Kill:',link[ind]
+		dellink[ind]
+		if ind==-1:#thelastelementoflink
+		ind=0
+		print'survice:',link[0]
+
+
+	if__name__=='__main__':
+
+	josephus(100000,300)
+	print'-'*30
+	josephus(10,5)
+	print'-'*30
+	josephus(10,1)
+
+

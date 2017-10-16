@@ -1,0 +1,39 @@
+//定义了一个双向链表的节点
+function Node(n,before,next) {
+    this.n = n;
+    this.before = before;
+    this.next = next;
+}
+ 
+var node = new Node(1,null,null);
+var linked = node;
+ 
+for(var i =2;i <= 50;i++) {
+    var temp = new Node(i,null,null);
+    //双向链表构建关联是前驱和后继两个
+    node.next = temp;
+    temp.before = node;
+    node = node.next;
+}
+
+//第50个和第1个拉手
+node.next = linked;
+linked.before = node;
+ 
+//出列的逻辑
+node = linked;
+for(var i = 1;;i++) {
+    if(node.next == node) {
+        //剩下一个node了
+        break;
+    }
+    if(i % 3 == 0) {
+        //node出列
+        node.before.next = node.next;
+        node.next.before = node.before;
+    }
+    node = node.next;
+}
+ 
+document.write(node.n);
+
